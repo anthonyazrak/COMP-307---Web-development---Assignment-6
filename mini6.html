@@ -1,0 +1,117 @@
+<!-- Anthony Azrak
+261054709 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Error styling -->
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <p>Registration Form</p>
+    <p>Please fill in all fields and click Register</p>
+    <p>User Information</p>
+
+    <form action="mini6.php" method="post" onsubmit="return validateForm()">
+        <table>
+            <tr>
+                <td>First name:</td>
+                <td><input type="text" name="first_name" size="30"></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td><input type="text" name="last_name" size="30"></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" name="email" size="30"></td>
+            </tr>
+            <tr>
+                <td>Phone:</td>
+                <td><input type="text" name="phone" size="30"></td>
+            </tr>
+        </table>
+        <p>Publications</p>
+        <p>Which book would you like information about:</p>
+        <select name="book">
+            <option value="The Hitchhiker's Guide to the Galaxy">The Hitchhiker's Guide to the Galaxy</option>
+            <option value="The Restaurant at the End of the Universe">The Restaurant at the End of the Universe</option>
+            <option value="Life, the Universe and Everything">Life, the Universe and Everything</option>
+            <option value="So Long, and Thanks for All the Fish">So Long, and Thanks for All the Fish</option>
+            <option value="Mostly Harmless">Mostly Harmless</option>
+        </select>
+        <p>Operating System</p>
+        <p>Which operating system do you use?</p>
+        <div style="display: flex; flex-direction: row; margin-bottom: 20px; ">
+            <div style="margin-right: 10px;"><input type="radio" name="os" value="Windows" checked>Windows</div>
+            <div style="margin-right: 10px;"><input type="radio" name="os" value="Mac OS X">Mac OS X</div>
+            <div style="margin-right: 10px;"><input type="radio" name="os" value="Linux">Linux</div>
+            <div><input type="radio" name="os" value="Other">Other</div>
+        </div>
+        
+        <input type="submit" value="Register">
+    </form>
+
+    <!-- JavaScript Validation -->
+    <script>
+        function validateForm() {
+            // Default valid flag
+            let isValid = true;
+
+            // Grabbing elements
+            const firstName = document.querySelector('[name="first_name"]');
+            const lastName = document.querySelector('[name="last_name"]');
+            const email = document.querySelector('[name="email"]');
+            const phone = document.querySelector('[name="phone"]');
+
+            // Resetting previous error states
+            firstName.classList.remove('error');
+            lastName.classList.remove('error');
+            email.classList.remove('error');
+            phone.classList.remove('error');
+
+            // Check if fields are empty
+            if (!firstName.value) {
+                firstName.classList.add('error');
+                isValid = false;
+            }
+
+            if (!lastName.value) {
+                lastName.classList.add('error');
+                isValid = false;
+            }
+
+            if (!email.value) {
+                email.classList.add('error');
+                isValid = false;
+            } else if (!email.value.includes('@')) { // Check if email contains @
+                alert("Email should contain '@'");
+                email.classList.add('error');
+                return false; // Return false to stop form submission
+            }
+
+            if (!phone.value) {
+                phone.classList.add('error');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                alert("Please fill in all fields!");
+                return false; // Return false to stop form submission
+            }
+
+            return true; // Return true to allow form submission
+        }
+    </script>
+
+</body>
+</html>
